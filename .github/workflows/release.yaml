@@ -1,0 +1,34 @@
+name: DEMO repo release
+# A new release is triggered by a new tag of the form viewer-VERSION
+on:
+  push:
+    tags:
+      - demo-*
+
+jobs:
+  Release:
+    name: DEMO repo release
+    runs-on: ubuntu-20.04
+    env:
+      GITHUB_TOKEN: ${{ secrets.RELEASE_CI_ACCESS_TOKEN }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Get version
+        run: |
+          # The environment variable GITHUB_REF is refs/tags/viewer-*
+          # echo "SETUP_VERSION=$(python3 -c "import configparser; config = configparser.ConfigParser(); config.read('setup.cfg'); print(config['metadata']['version'])")" >> $GITHUB_ENV
+          # echo "SOURCE_VERSION=$(python3 -c "import src.cbmc_viewer.version; print(src.cbmc_viewer.version.NUMBER)")" >> $GITHUB_ENV
+          echo "TAG_VERSION=$(echo ${{ github.ref }} | cut -d "/" -f 3 | cut -d "-" -f 2)" >> $GITHUB_ENV
+      - name: Version Check
+        run: |
+           echo "TAG VERSION ${env.TAG_VERSION}"
+      - name: Create release
+        uses: actions/create-release@v1
+        with:
+          tag_name: demo-${{ env.TAG_VERSION }}
+          release_name: demo-${{ env.TAG_VERSION }}
+          body: |
+            This is DEMO repo version ${{ env.TAG_VERSION }}.
+          draft: false
+          prerelease: false
