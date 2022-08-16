@@ -2,11 +2,11 @@
 package main
 
 import (
-   "fmt"
-   "os"
+	"fmt"
+	"os"
 )
 
 func main() {
-   fmt.Println("Hello, v0.3.1!")
-   os.Exit(42)
+	fmt.Println("Hello, v0.3.2!")
+	os.Exit(42)
 }
