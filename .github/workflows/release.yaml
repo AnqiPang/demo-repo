@@ -22,7 +22,7 @@ jobs:
           echo "TAG_VERSION=$(echo ${{ github.ref }} | cut -d "/" -f 3 | cut -d "-" -f 2)" >> $GITHUB_ENV
       - name: Version Check
         run: |
-           echo "TAG VERSION ${env.TAG_VERSION}"
+           echo "TAG VERSION ${{env.TAG_VERSION}}"
       - name: Create release
         uses: actions/create-release@v1
         with:
