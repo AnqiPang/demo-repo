@@ -24,7 +24,7 @@ jobs:
         run: |
            echo "TAG VERSION ${{env.TAG_VERSION}}"
       - name: Create release
-        uses: actions/create-release@v1
+        uses: actions/create-release@v1 # how to overwrite a release
         with:
           tag_name: demo-${{ env.TAG_VERSION }}
           release_name: demo-${{ env.TAG_VERSION }}
