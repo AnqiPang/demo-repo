@@ -7,6 +7,6 @@ import (
 )
 
 func main() {
-	fmt.Println("Hello, v0.3.3!")
+	fmt.Println("Hello, v0.3.4!")
 	os.Exit(42)
 }
