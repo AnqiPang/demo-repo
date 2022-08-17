@@ -5,5 +5,5 @@ import (
 )
 
 func main() {
-	fmt.Println("Hello, demo-0.3.9!")
+	fmt.Println("Hello, demo-0.4.0!")
 }
