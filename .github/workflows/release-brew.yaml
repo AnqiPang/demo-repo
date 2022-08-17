@@ -44,7 +44,7 @@ on:
 
 env:
   FORMULA: demo
-  TAP: AnqiPang/tap
+  TAP: anqipang/tap
   BOT_USER: re0bot
   BOT_EMAIL: ${{ secrets.BOT_EMAIL }}
   BOT_TOKEN: ${{ secrets.RELEASE_CI_ACCESS_TOKEN }}
@@ -106,7 +106,7 @@ jobs:
       - name: Get File Name
         id: get_file_name
         run: |
-          file_name="$(cat *.json | jq -r '."${{ env.TAP }}/${{ env.FORMULA }}".bottle.tags[].filename')"
+          file_name="$(cat *.json | jq -r '."${{ env.TAP }}/${{ env.FORMULA }}".bottle.tags.filename')"
           echo "::set-output name=file_name::$file_name"
       - name: Upload bottles as artifact
         uses: actions/upload-artifact@main
