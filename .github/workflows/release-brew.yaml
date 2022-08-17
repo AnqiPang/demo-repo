@@ -85,6 +85,7 @@ jobs:
           brew tap ${{ env.TAP }}
           brew update-reset
           brew upgrade
+          brew install go || brew link --overwrite go
           cd $(brew --repo ${{ env.TAP }})
           git remote add fork-repo ${{ env.FORK_REPO }}
           git fetch fork-repo
