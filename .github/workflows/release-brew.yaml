@@ -84,7 +84,6 @@ jobs:
         run: |
           brew tap ${{ env.TAP }}
           brew update-reset
-          brew upgrade
           brew install go || brew link --overwrite go
           cd $(brew --repo ${{ env.TAP }})
           git remote add fork-repo ${{ env.FORK_REPO }}
@@ -101,6 +100,7 @@ jobs:
         id: get_package_path
         run: |
           ls -la
+          cat demo--${{ env.VERSION }}.big_sur.bottle.json
           bottle_name="$(ls *.tar.gz)"
           echo "::set-output name=bottle::$bottle_name"
       - name: Get File Name
