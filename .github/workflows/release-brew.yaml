@@ -73,7 +73,7 @@ jobs:
     needs: homebrew-pr
     strategy:
       matrix:
-        os: [macos-latest]
+        os: [macos-latest, self-hosted]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Set up Homebrew
