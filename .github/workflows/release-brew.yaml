@@ -142,6 +142,7 @@ jobs:
         run: |
           brew tap ${{ env.TAP }}
           brew update-reset
+          brew install go || brew link --overwrite go # overwrite installed go otherwise brew test-bot will fail due to unable to install go
           cd $(brew --repo ${{ env.TAP }})
           git remote add fork-repo ${{ env.FORK_REPO }}
           git fetch fork-repo
@@ -151,3 +152,11 @@ jobs:
           brew bottle --merge --write $(ls *.json)
           cd $(brew --repo ${{ env.TAP }})
           git push fork-repo bump-${{ env.FORMULA }}-${{ env.VERSION }}
+
+  cleanup-env:
+    needs: build-bottle
+    runs-on: self-hosted
+    steps:
+      - name: Uninstall Homebrew dependencies
+        run: |
+          brew uninstall go
