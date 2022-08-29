@@ -80,11 +80,15 @@ jobs:
         id: set-up-homebrew
         uses: Homebrew/actions/setup-homebrew@master
 
+      - name: Install Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: '1.19.0' # The Go version to download (if necessary) and use.
+
       - name: Checkout PR
         run: |
           brew tap ${{ env.TAP }}
           brew update-reset
-          brew install go || brew link --overwrite go
           cd $(brew --repo ${{ env.TAP }})
           git remote add fork-repo ${{ env.FORK_REPO }}
           git fetch fork-repo
