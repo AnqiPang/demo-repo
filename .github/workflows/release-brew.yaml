@@ -74,7 +74,8 @@ jobs:
     steps:
       - name: Cleanup Homebrew dependencies
         run: |
-          brew uninstall go
+          brew uninstall go || true
+          rm -r /Users/ec2-user/actions-runner/_work
 
   build-bottle:
     needs: homebrew-pr
