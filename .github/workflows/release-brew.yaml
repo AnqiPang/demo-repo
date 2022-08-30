@@ -69,16 +69,16 @@ jobs:
         env:
           HOMEBREW_GITHUB_API_TOKEN: ${{ env.BOT_TOKEN }}
 
-  cleanup-env:
-    runs-on: self-hosted
-    steps:
-      - name: Cleanup Homebrew dependencies
-        run: |
-          brew uninstall go || true
-          brew uninstall ${{ env.FORMULA }} || true
-          brew untap ${{ env.TAP }} || true
-          brew autoremove
-          rm -r /Users/ec2-user/actions-runner/_work || true
+#  cleanup-env:
+#    runs-on: self-hosted
+#    steps:
+#      - name: Cleanup Homebrew dependencies
+#        run: |
+#          brew uninstall go || true
+#          brew uninstall ${{ env.FORMULA }} || true
+#          brew untap ${{ env.TAP }} || true
+#          brew autoremove
+#          rm -r /Users/ec2-user/actions-runner/_work || true
 
   build-bottle:
     needs: homebrew-pr
