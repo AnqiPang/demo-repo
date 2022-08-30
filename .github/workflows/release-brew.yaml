@@ -75,7 +75,10 @@ jobs:
       - name: Cleanup Homebrew dependencies
         run: |
           brew uninstall go || true
-          rm -r /Users/ec2-user/actions-runner/_work
+          brew uninstall ${{ env.FORMULA }} || true
+          brew untap ${{ env.TAP }} || true
+          brew autoremove
+          rm -r /Users/ec2-user/actions-runner/_work || true
 
   build-bottle:
     needs: homebrew-pr
